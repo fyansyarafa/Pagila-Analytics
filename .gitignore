@@ -11,3 +11,7 @@ wheels/
 
 # Logs
 *.log
+logs/
+
+# Profiles
+profiles.yml
