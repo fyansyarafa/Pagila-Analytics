@@ -1,0 +1,35 @@
+sources:
+- name: pagila
+  type: postgres
+  tables:
+    - name: stream_pagila_actor
+      description: "Contains information about actors in the database."
+    - name: stream_pagila_film
+      description: "Contains information about films available in the database."
+    - name: stream_pagila_customer
+      description: "Contains information about customers who rent films."
+    - name: stream_pagila_rental
+      description: "Contains information about film rentals, including rental dates and return dates."
+    - name: stream_pagila_payment
+      description: "Contains information about payments made for film rentals."
+    - name: stream_pagila_staff
+      description: "Contains information about staff members who manage the rental process."
+    - name: stream_pagila_inventory
+      description: "Contains information about the inventory of films available for rent."
+    - name: stream_pagila_category
+      description: "Contains information about film categories, such as genre."
+    - name: stream_pagila_language
+      description: "Contains information about the languages in which films are available."
+    - name: stream_pagila_address
+      description: "Contains information about addresses associated with customers and staff."
+    - name: stream_pagila_city
+      description: "Contains information about cities where customers and staff are located."
+    - name: stream_pagila_country
+      description: "Contains information about countries where customers and staff are located."
+    - name: stream_pagila_store
+      description: "Contains information about stores where films are rented."
+    - name: stream_pagila_film_actor
+      description: "Contains information about the relationship between films and actors."
+    - name: stream_pagila_film_category
+      description: "Contains information about the relationship between films and categories."
+    
