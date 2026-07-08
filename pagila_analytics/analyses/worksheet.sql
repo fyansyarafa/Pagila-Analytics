@@ -1,0 +1,1 @@
+select * from {{ source('source_pagila', 'stream_pagila_actor') }}

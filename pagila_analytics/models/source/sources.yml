@@ -1,6 +1,9 @@
+version: 2
+
 sources:
-- name: pagila
-  type: postgres
+- name: source_pagila
+  database: '{{ target.database }}'
+  schema: bronze
   tables:
     - name: stream_pagila_actor
       description: "Contains information about actors in the database."
@@ -32,4 +35,3 @@ sources:
       description: "Contains information about the relationship between films and actors."
     - name: stream_pagila_film_category
       description: "Contains information about the relationship between films and categories."
-    
