@@ -49,7 +49,7 @@ select
         'fc.category_id'
     ])
   }} as film_detail_sk,
-  a.full_name, 
+  a.full_name actor_full_name, 
   f.title, 
   f.description, 
   f.release_year, 
