@@ -1,0 +1,10 @@
+version: 2
+
+models:
+    - name: silver_stream_pagila_film_actor_detail
+      columns:
+      - name: film_detail_sk
+        description: surrogate key for film_actor (actor_id + film_id + category_id)
+        data_tests:
+          - not_null
+          - unique
