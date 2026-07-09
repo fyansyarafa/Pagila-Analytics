@@ -1,11 +1,15 @@
 select 
-    actor_id,
-    first_name,
-    last_name,
-    last_update,
-    __deleted,
-    synced_at kafka_synced_at,
-    now()::timestamp as dbt_refresh_date
+{{
+    dbt_utils.star(
+        from=source('source_pagila', 'stream_pagila_actor'),
+        except=["__deleted"]
+    )
+}}
+
+{{
+    audit_columns()
+}}
+
 from {{
     source('source_pagila', 'stream_pagila_actor')
 }}
