@@ -36,24 +36,33 @@ with film_actor as (
     from {{
         ref('silver_stream_pagila_film_category')
     }}
+), pagila_language as (
+    select 
+      language_id, 
+      "name"
+    from{{
+      ref('silver_stream_pagila_language')
+    }}
 )
 
 select 
   fa.actor_id, 
   fa.film_id, 
   fc.category_id,
+  pl.language_id,
   {{
     dbt_utils.generate_surrogate_key([
         'fa.actor_id',
         'fa.film_id',
-        'fc.category_id'
+        'fc.category_id',
+        'pl.language_id'
     ])
   }} as film_detail_sk,
   a.full_name actor_full_name, 
+  pl.name as language_name,
   f.title, 
   f.description, 
   f.release_year, 
-  f.language_id, 
   f.original_language_id, 
   f.rental_duration, 
   f.rental_rate, 
@@ -66,3 +75,4 @@ from film_actor fa
 left join actor a on fa.actor_id = a.actor_id
 left join film f on fa.film_id = f.film_id
 left join film_category fc on f.film_id = fc.film_id
+left join pagila_language pl on f.language_id = pl.language_id
