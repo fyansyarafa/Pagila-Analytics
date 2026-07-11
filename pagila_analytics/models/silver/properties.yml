@@ -16,3 +16,11 @@ models:
         data_tests:
           - not_null
           - unique
+
+    - name: silver_stream_pagila_store_inventory
+      columns:
+      - name: store_inventory_sk
+        description: surrogate key for film_actor (store_id, film_id)
+        data_tests:
+          - not_null
+          - unique
