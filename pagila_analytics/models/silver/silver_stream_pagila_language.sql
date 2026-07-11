@@ -1,7 +1,7 @@
 select 
     {{
         dbt_utils.star(
-            from=source('source_pagila', 'stream_pagila_inventory'),
+            from=source('source_pagila', 'stream_pagila_language'),
             except=["synced_at", "__deleted"]
         )
     }},
@@ -10,6 +10,6 @@ select
     }}
 
 from {{
-    source('source_pagila', 'stream_pagila_inventory')
+    source('source_pagila', 'stream_pagila_language')
 }}
 where __deleted = 'false'
