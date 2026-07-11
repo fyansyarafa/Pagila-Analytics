@@ -43,7 +43,8 @@ select
     a.postal_code,
     a.phone,
     c.city,
-    co.country
+    co.country,
+    now() as __audit_dbt_refresh_date
 from address_table a 
 left join city c on a.city_id = c.city_id
 left join country co on co.country_id = c.country_id

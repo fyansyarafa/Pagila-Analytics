@@ -19,7 +19,8 @@ with store as (
     postal_code,
     phone,
     city,
-    country
+    country,
+    "__audit_dbt_refresh_date"
   from {{ ref("silver_stream_pagila_address_detail") }}
 )
 
@@ -43,11 +44,12 @@ select
         "city_id",
         "city_id",
         "country_id",
-        "address_detail_sk"
-      ],
-      relation_alias="ad"
+        "address_detail_sk",
+        "__audit_dbt_refresh_date"
+      ]
     )
-  }}
+  }}, 
+  now() as __audit_dbt_refresh_date
 from
 store s 
 left join staff sf on s.manager_staff_id = sf.staff_id
