@@ -1,68 +1,64 @@
-
-with film_actor as (
+with store as (
   select 
-    actor_id, 
-    film_id
+    store_id,
+    manager_staff_id, 
+    address_id
   from {{
-    ref('silver_stream_pagila_film_actor')
+    ref("silver_stream_pagila_store")
   }}
-), actor as (
-  select
-    actor_id,
-    full_name
-  from {{
-      ref('silver_stream_pagila_actor')
-    }}
-), film as (
+), inventory as (
   select 
-    film_id,
-    title, 
-    description,
-    release_year,
-    language_id,
-    original_language_id,
-    rental_duration,
-    rental_rate,
-    length,
-    replacement_cost, 
-    rating
+    inventory_id,
+    film_id, 
+    store_id
   from {{
-      ref('silver_stream_pagila_film')
-    }}
-), film_category as (
-    select 
-        film_id,
-        category_id
-    from {{
-        ref('silver_stream_pagila_film_category')
-    }}
+    ref("silver_stream_pagila_inventory")
+  }}
+), staff as (
+  select 
+    staff_id,
+    first_name || ' ' || last_name as staff_full_name,
+    email,
+    active
+  from {{
+    ref("silver_stream_pagila_staff")
+  }}
+), address_table as (
+  select 
+    address_id,
+    address,
+    address2,
+    postal_code,
+    phone,
+    city,
+    country
+  from {{
+    ref("silver_stream_pagila_address_detail")
+  }}
 )
 
 select 
-  fa.actor_id, 
-  fa.film_id, 
-  fc.category_id,
-  {{
-    dbt_utils.generate_surrogate_key([
-        'fa.actor_id',
-        'fa.film_id',
-        'fc.category_id'
-    ])
-  }} as film_detail_sk,
-  a.full_name, 
-  f.title, 
-  f.description, 
-  f.release_year, 
-  f.language_id, 
-  f.original_language_id, 
-  f.rental_duration, 
-  f.rental_rate, 
-  f.length, 
-  f.replacement_cost, 
-  f.rating,
-  now() as __audit_dbt_refresh_date
+  s.store_id,
+  sf.staff_id as manager_staff_id,
+  s.address_id,
+  i.inventory_id,
+  i.film_id,
+  sf.staff_full_name,
+  sf.active staff_active,
+  sf.email staff_email,
+  ad.
+from
+store s 
+left join inventory i on s.store_id = i.store_id
+left join staff sf on s.manager_staff_id = sf.staff_id
+left join address_table ad on ad.address_id = s.address_id
 
-from film_actor fa
-left join actor a on fa.actor_id = a.actor_id
-left join film f on fa.film_id = f.film_id
-left join film_category fc on f.film_id = fc.film_id
+
+
+
+
+
+
+
+
+
