@@ -24,3 +24,19 @@ models:
         data_tests:
           - not_null
           - unique
+    
+
+    - name: silver_stream_pagila_customer_membership_detail
+      columns:
+      - name: customer_membership_sk
+        description: surrogate key for film_actor (store_id, customer_id)
+        data_tests:
+          - not_null
+          - unique
+
+    - name: silver_stream_pagila_rental_detail
+      columns:
+      - name: rental_id
+        data_tests:
+          - not_null
+          - unique

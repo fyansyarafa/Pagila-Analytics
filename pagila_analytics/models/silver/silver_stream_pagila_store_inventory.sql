@@ -28,6 +28,7 @@ with store_profile as (
 select distinct
   sp.store_id,
   fd.film_id,
+  inv.inventory_id,
   {{
       dbt_utils.generate_surrogate_key([
           'sp.store_id',
