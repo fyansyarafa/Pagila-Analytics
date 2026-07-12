@@ -36,19 +36,20 @@ select
     ])
   }} as store_profile_sk,
   sf.staff_full_name manager_name,
-  {{
-    exclude_column(
-      ref("silver_stream_pagila_address_detail"),
-      [
-        "address_id", 
-        "city_id",
-        "city_id",
-        "country_id",
-        "address_detail_sk",
-        "__audit_dbt_refresh_date"
-      ]
-    )
-  }}, 
+{{ dbt_utils.star(
+    from=ref("silver_stream_pagila_address_detail"),
+    except=[
+      "address_id",
+      "city_id",
+      "country_id",
+      "address_detail_sk",
+      "__audit_dbt_refresh_date"
+    ]
+) }}
+,
+
+
+
   now() as __audit_dbt_refresh_date
 from
 store s 

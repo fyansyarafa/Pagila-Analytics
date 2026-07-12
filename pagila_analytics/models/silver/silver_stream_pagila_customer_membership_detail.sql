@@ -36,7 +36,12 @@ select
     ])
   }} as customer_membership_sk,
 cm.*,
-ad.*,
+  "ad"."address",
+  "ad"."address2",
+  "ad"."postal_code",
+  "ad"."phone",
+  "ad"."city",
+  "ad"."country",
 now() as __audit_dbt_refresh_date
 from customer_membership cm 
 left join address_detail ad 
