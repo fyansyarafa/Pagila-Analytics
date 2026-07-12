@@ -33,3 +33,10 @@ models:
         data_tests:
           - not_null
           - unique
+
+    - name: silver_stream_pagila_rental_detail
+      columns:
+      - name: rental_id
+        data_tests:
+          - not_null
+          - unique
